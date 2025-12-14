@@ -645,13 +645,13 @@ p {
 
 .logo-slide-track {
   display: flex;
-  width: calc(250px * 12);
-  /* 250px per slide * 12 slides */
+  width: calc(300px * 12);
+  /* 300px per slide * 12 slides */
   animation: scroll 40s linear infinite;
 }
 
 .logo-slide {
-  width: 250px;
+  width: 300px;
   padding: 0 var(--space-md);
   display: flex;
   align-items: center;
@@ -660,9 +660,9 @@ p {
 
 .logo-slide img {
   max-width: 100%;
-  max-height: 80px;
+  max-height: 120px;
   filter: grayscale(100%);
-  opacity: 0.6;
+  opacity: 0.8;
   transition: var(--transition-smooth);
   object-fit: contain;
 }
@@ -679,7 +679,7 @@ p {
   }
 
   100% {
-    transform: translateX(calc(-250px * 6));
+    transform: translateX(calc(-300px * 6));
     /* Scroll width of one set */
   }
 }
