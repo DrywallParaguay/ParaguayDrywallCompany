@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Nuestros Clientes - Drywall Company | Proyectos de Élite</title>
+    <meta name="description"
+        content="Empresas constructoras y desarrolladores que confían en Drywall Company para sus proyectos de alta gama. Conozca nuestro portafolio de clientes.">
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Additional styles for clients page */
+        .clients-hero {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.85), rgba(44, 62, 80, 0.75)),
+                url('images/portfolio-2.png') center/cover;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: var(--space-xxl) var(--space-md);
+        }
+
+        .clients-hero h1 {
+            color: white;
+            margin-bottom: var(--space-md);
+        }
+
+        .clients-hero .subtitle {
+            color: var(--color-champagne-gold);
+            margin-bottom: var(--space-md);
+        }
+
+        .clients-hero p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+        }
+
+        .clients-intro {
+            text-align: center;
+            padding: var(--space-xxl) var(--space-md);
+            background: white;
+        }
+
+        .clients-intro h2 {
+            margin-bottom: var(--space-md);
+        }
+
+        .clients-intro p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+
+        .clients-grid-section {
+            padding: var(--space-xxl) var(--space-md);
+            background: var(--color-soft-gray);
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .client-card {
+            background: white;
+            padding: var(--space-lg);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: var(--transition-smooth);
+            border: 2px solid transparent;
+        }
+
+        .client-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--color-champagne-gold);
+        }
+
+        .client-logo {
+            max-width: 180px;
+            max-height: 100px;
+            object-fit: contain;
+            margin-bottom: var(--space-md);
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: var(--transition-smooth);
+        }
+
+        .client-card:hover .client-logo {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .client-info h3 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-matte-black);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .client-info p {
+            font-size: 0.875rem;
+            color: var(--color-dark-gray);
+            text-align: center;
+        }
+
+        .stats-section {
+            background: var(--color-matte-black);
+            color: white;
+            padding: var(--space-xxl) var(--space-md);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-xl);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            padding: var(--space-md);
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-champagne-gold);
+            margin-bottom: var(--space-sm);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .cta-section {
+            background: white;
+            text-align: center;
+            padding: var(--space-xxl) var(--space-md);
+        }
+
+        .cta-section h2 {
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto var(--space-xl);
+            font-size: 1.125rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--color-champagne-gold);
+            color: var(--color-matte-black);
+            padding: 1rem 3rem;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: var(--transition-smooth);
+        }
+
+        .cta-button:hover {
+            background: var(--color-matte-black);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 120, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .clients-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">DRYWALL COMPANY</a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#filosofia">Filosofía</a></li>
+                <li><a href="index.html#portafolio">Portafolio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- CLIENTS HERO -->
+    <section class="clients-hero">
+        <div class="fade-in">
+            <p class="subtitle">Confianza y Prestigio</p>
+            <h1>Nuestros Clientes</h1>
+            <p>
+                Las empresas constructoras y desarrolladores más prestigiosos de la región confían en
+                Drywall Company para materializar sus proyectos de alta gama con la excelencia que
+                los distingue.
+            </p>
+        </div>
+    </section>
+
+    <!-- INTRODUCTION -->
+    <section class="clients-intro fade-in">
+        <div class="container">
+            <h2>Alianzas Estratégicas</h2>
+            <p>
+                Durante más de una década, hemos construido relaciones sólidas con los líderes de la
+                industria de la construcción. Cada proyecto es una oportunidad para demostrar nuestra
+                maestría técnica y compromiso inquebrantable con la calidad.
+            </p>
+        </div>
+    </section>
+
+    <!-- CLIENTS GRID -->
+    <section class="clients-grid-section">
+        <div class="container">
+            <div class="clients-grid">
+
+                <div class="client-card fade-in">
+                    <img src="images/client_logo_1_1765473377607.png" alt="Cliente 1" class="client-logo">
+                    <div class="client-info">
+                        <h3>Grupo Constructor Premier</h3>
+                        <p>Edificios residenciales de lujo</p>
+                    </div>
+                </div>
+
+                <div class="client-card fade-in">
+                    <img src="images/client_logo_2_1765473394322.png" alt="Cliente 2" class="client-logo">
+                    <div class="client-info">
+                        <h3>Desarrollos Inmobiliarios Elite</h3>
+                        <p>Complejos residenciales premium</p>
+                    </div>
+                </div>
+
+                <div class="client-card fade-in">
+                    <img src="images/client_logo_3_1765473409646.png" alt="Cliente 3" class="client-logo">
+                    <div class="client-info">
+                        <h3>Cadena Hotelera Internacional</h3>
+                        <p>Hoteles 5 estrellas</p>
+                    </div>
+                </div>
+
+                <div class="client-card fade-in">
+                    <img src="images/client_logo_4_1765473427387.png" alt="Cliente 4" class="client-logo">
+                    <div class="client-info">
+                        <h3>Corporativo Business Center</h3>
+                        <p>Edificios de oficinas clase A</p>
+                    </div>
+                </div>
+
+                <div class="client-card fade-in">
+                    <img src="images/client_logo_5_1765473443218.png" alt="Cliente 5" class="client-logo">
+                    <div class="client-info">
+                        <h3>Residencial Luxury Living</h3>
+                        <p>Condominios de alta gama</p>
+                    </div>
+                </div>
+
+                <div class="client-card fade-in">
+                    <img src="images/client_logo_6_1765473458603.png" alt="Cliente 6" class="client-logo">
+                    <div class="client-info">
+                        <h3>Constructora Arquitectura Moderna</h3>
+                        <p>Proyectos comerciales e industriales</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid fade-in">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Proyectos Completados</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Empresas Clientes</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Años de Experiencia</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Satisfacción Garantizada</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+        <div class="container fade-in">
+            <h2>Únase a Nuestros Clientes Distinguidos</h2>
+            <p>
+                Descubra por qué las empresas líderes eligen Drywall Company para sus proyectos más
+                importantes. Solicite una consulta personalizada hoy mismo.
+            </p>
+            <a href="index.html#contacto" class="cta-button">Solicitar Consulta</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Drywall Company. Todos los derechos reservados. | La Maestría del Detalle Invisible</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>

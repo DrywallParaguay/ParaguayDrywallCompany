@@ -1,0 +1,256 @@
+// ===================================
+// ADMIN PANEL LOGIC - WITH IMAGE UPLOAD
+// ===================================
+
+// Default credentials (change in production!)
+const ADMIN_CREDENTIALS = {
+    username: 'admin',
+    password: 'admin123'
+};
+
+// Store uploaded images temporarily before saving
+let pendingImages = {};
+
+// ===== AUTHENTICATION =====
+const loginForm = document.getElementById('loginForm');
+const loginContainer = document.getElementById('loginContainer');
+const adminContainer = document.getElementById('adminContainer');
+
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+        loginContainer.style.display = 'none';
+        adminContainer.style.display = 'block';
+        loadConfig();
+        setupFileUploadListeners();
+    } else {
+        alert('Credenciales incorrectas. Por favor, intenta de nuevo.');
+    }
+});
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    adminContainer.style.display = 'none';
+    loginContainer.style.display = 'flex';
+    loginForm.reset();
+    pendingImages = {};
+});
+
+// ===== TAB NAVIGATION =====
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-tab');
+
+        // Remove active class from all tabs and buttons
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        // Add active class to clicked button and corresponding tab
+        button.classList.add('active');
+        document.getElementById(targetTab).classList.add('active');
+    });
+});
+
+// ===== LOAD CONFIGURATION =====
+function loadConfig() {
+    // Try to load from localStorage first, then fall back to config.json
+    const savedConfig = localStorage.getItem('drywallConfig');
+
+    if (savedConfig) {
+        const config = JSON.parse(savedConfig);
+        populateForm(config);
+    } else {
+        // Load from config.json
+        fetch('config.json')
+            .then(response => response.json())
+            .then(config => {
+                populateForm(config);
+                // Save to localStorage
+                localStorage.setItem('drywallConfig', JSON.stringify(config));
+            })
+            .catch(error => {
+                console.error('Error loading config:', error);
+                alert('Error al cargar la configuración. Por favor, recarga la página.');
+            });
+    }
+}
+
+// ===== POPULATE FORM =====
+function populateForm(config) {
+    // General
+    document.getElementById('siteName').value = config.siteName || '';
+    document.getElementById('logoText').value = config.logo.text || '';
+
+    // Hero Content
+    document.getElementById('heroSubtitle').value = config.heroContent.subtitle || '';
+    document.getElementById('heroTitle').value = config.heroContent.title || '';
+    document.getElementById('heroDescription').value = config.heroContent.description || '';
+
+    // Contact
+    document.getElementById('phone').value = config.contact.phone || '';
+    document.getElementById('email').value = config.contact.email || '';
+    document.getElementById('address').value = config.contact.address || '';
+
+    // Social Media
+    document.getElementById('facebook').value = config.socialMedia.facebook || '';
+    document.getElementById('instagram').value = config.socialMedia.instagram || '';
+    document.getElementById('linkedin').value = config.socialMedia.linkedin || '';
+    document.getElementById('whatsapp').value = config.socialMedia.whatsapp || '';
+
+    // Load images (including logo)
+    const allImages = { ...config.images };
+    if (config.logo.image) {
+        allImages.logoImage = config.logo.image;
+    }
+
+    // Load image previews
+    loadImagePreviews(allImages);
+
+    // Initialize pending images with current config
+    pendingImages = { ...allImages };
+}
+
+// ===== LOAD IMAGE PREVIEWS =====
+function loadImagePreviews(images) {
+    Object.keys(images).forEach(key => {
+        const imageData = images[key];
+        const previewDiv = document.getElementById(`preview-${key}`);
+
+        if (imageData && previewDiv) {
+            // Image data can be either a path or base64
+            previewDiv.innerHTML = `<img src="${imageData}" alt="${key}">`;
+        }
+    });
+}
+
+// ===== SETUP FILE UPLOAD LISTENERS =====
+function setupFileUploadListeners() {
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+
+    fileInputs.forEach(input => {
+        input.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Validate file is an image
+            if (!file.type.startsWith('image/')) {
+                alert('Por favor selecciona un archivo de imagen válido.');
+                return;
+            }
+
+            // Get the image key from input id (remove 'File' suffix)
+            const imageKey = this.id.replace('File', '');
+
+            // Convert to base64
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const base64Data = event.target.result;
+
+                // Store in pending images
+                pendingImages[imageKey] = base64Data;
+
+                // Show preview immediately
+                const previewDiv = document.getElementById(`preview-${imageKey}`);
+                if (previewDiv) {
+                    previewDiv.innerHTML = `<img src="${base64Data}" alt="${imageKey}">`;
+                }
+            };
+
+            reader.onerror = function () {
+                alert('Error al leer el archivo. Por favor intenta de nuevo.');
+            };
+
+            reader.readAsDataURL(file);
+        });
+    });
+
+    // Setup clear buttons
+    const clearButtons = document.querySelectorAll('.btn-clear');
+    clearButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const imageKey = this.getAttribute('data-target');
+            clearImage(imageKey);
+        });
+    });
+}
+
+// ===== CLEAR IMAGE =====
+function clearImage(imageKey) {
+    // Remove from pending images
+    delete pendingImages[imageKey];
+
+    // Clear preview
+    const previewDiv = document.getElementById(`preview-${imageKey}`);
+    if (previewDiv) {
+        previewDiv.innerHTML = '';
+    }
+
+    // Reset file input
+    const fileInput = document.getElementById(`${imageKey}File`);
+    if (fileInput) {
+        fileInput.value = '';
+    }
+}
+
+// ===== SAVE CONFIGURATION =====
+document.getElementById('saveBtn').addEventListener('click', () => {
+    const config = {
+        siteName: document.getElementById('siteName').value,
+        logo: {
+            text: document.getElementById('logoText').value,
+            image: pendingImages.logoImage || ''
+        },
+        contact: {
+            phone: document.getElementById('phone').value,
+            email: document.getElementById('email').value,
+            address: document.getElementById('address').value
+        },
+        socialMedia: {
+            facebook: document.getElementById('facebook').value,
+            instagram: document.getElementById('instagram').value,
+            linkedin: document.getElementById('linkedin').value,
+            whatsapp: document.getElementById('whatsapp').value
+        },
+        images: {
+            hero1: pendingImages.hero1 || '',
+            hero2: pendingImages.hero2 || '',
+            portfolio1: pendingImages.portfolio1 || '',
+            portfolio2: pendingImages.portfolio2 || '',
+            portfolio3: pendingImages.portfolio3 || '',
+            portfolio4: pendingImages.portfolio4 || ''
+        },
+        heroContent: {
+            subtitle: document.getElementById('heroSubtitle').value,
+            title: document.getElementById('heroTitle').value,
+            description: document.getElementById('heroDescription').value
+        }
+    };
+
+    // Save to localStorage
+    localStorage.setItem('drywallConfig', JSON.stringify(config));
+
+    // Show success toast
+    showToast();
+});
+
+// ===== SHOW TOAST =====
+function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+// ===== PREVIEW WEBSITE =====
+document.getElementById('previewBtn').addEventListener('click', () => {
+    window.open('index.html', '_blank');
+});

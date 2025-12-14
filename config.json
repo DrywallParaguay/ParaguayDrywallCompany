@@ -1,0 +1,31 @@
+{
+    "siteName": "DRYWALL COMPANY",
+    "logo": {
+        "text": "DRYWALL COMPANY",
+        "image": ""
+    },
+    "contact": {
+        "phone": "+595 981 234 567",
+        "email": "info@drywallcompany.com",
+        "address": "Asunción, Paraguay"
+    },
+    "socialMedia": {
+        "facebook": "https://facebook.com/drywallcompany",
+        "instagram": "https://instagram.com/drywallcompany",
+        "linkedin": "https://linkedin.com/company/drywallcompany",
+        "whatsapp": "+595981234567"
+    },
+    "images": {
+        "hero1": "images/hero-1.png",
+        "hero2": "images/hero-2.png",
+        "portfolio1": "images/portfolio-1.png",
+        "portfolio2": "images/portfolio-2.png",
+        "portfolio3": "images/portfolio-3.png",
+        "portfolio4": "images/portfolio-4.png"
+    },
+    "heroContent": {
+        "subtitle": "Artesanía en Construcción Ligera",
+        "title": "La Maestría del Detalle Invisible",
+        "description": "Donde la precisión estructural se encuentra con la artesanía de élite"
+    }
+}
