@@ -28,7 +28,7 @@ function applyConfig(config) {
     const logoElement = document.querySelector('.logo');
     if (logoElement) {
         if (config.logo.image) {
-            logoElement.innerHTML = `<img src="${config.logo.image}" alt="${config.logo.text}" style="height: 2rem;">`;
+            logoElement.innerHTML = `<img src="${config.logo.image}" alt="${config.logo.text}">`;
         } else {
             logoElement.textContent = config.logo.text;
         }
