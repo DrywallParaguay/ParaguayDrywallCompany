@@ -48,12 +48,12 @@ function applyConfig(config) {
     if (heroSlides[0] && config.images.hero1) heroSlides[0].src = config.images.hero1;
     if (heroSlides[1] && config.images.hero2) heroSlides[1].src = config.images.hero2;
 
-    // Update portfolio images
-    const portfolioItems = document.querySelectorAll('.portfolio-item img');
-    if (portfolioItems[0] && config.images.portfolio1) portfolioItems[0].src = config.images.portfolio1;
-    if (portfolioItems[1] && config.images.portfolio2) portfolioItems[1].src = config.images.portfolio2;
-    if (portfolioItems[2] && config.images.portfolio3) portfolioItems[2].src = config.images.portfolio3;
-    if (portfolioItems[3] && config.images.portfolio4) portfolioItems[3].src = config.images.portfolio4;
+    // Update portfolio images (Disabled to prefer hardcoded HTML paths)
+    // const portfolioItems = document.querySelectorAll('.portfolio-item img');
+    // if (portfolioItems[0] && config.images.portfolio1) portfolioItems[0].src = config.images.portfolio1;
+    // if (portfolioItems[1] && config.images.portfolio2) portfolioItems[1].src = config.images.portfolio2;
+    // if (portfolioItems[2] && config.images.portfolio3) portfolioItems[2].src = config.images.portfolio3;
+    // if (portfolioItems[3] && config.images.portfolio4) portfolioItems[3].src = config.images.portfolio4;
 
     // Add social media links to footer if they don't exist
     addSocialMediaLinks(config.socialMedia);
