@@ -24,15 +24,15 @@ function loadSiteConfig() {
 }
 
 function applyConfig(config) {
-    // Update logo
-    const logoElement = document.querySelector('.logo');
-    if (logoElement) {
-        if (config.logo.image) {
-            logoElement.innerHTML = `<img src="${config.logo.image}" alt="${config.logo.text}">`;
-        } else {
-            logoElement.textContent = config.logo.text;
-        }
-    }
+    // Update logo (Disabled to prefer hardcoded HTML)
+    // const logoElement = document.querySelector('.logo');
+    // if (logoElement) {
+    //     if (config.logo.image) {
+    //         logoElement.innerHTML = `<img src="${config.logo.image}" alt="${config.logo.text}">`;
+    //     } else {
+    //         logoElement.textContent = config.logo.text;
+    //     }
+    // }
 
     // Update hero content
     const heroSubtitle = document.querySelector('.hero-content .subtitle');
@@ -43,10 +43,10 @@ function applyConfig(config) {
     if (heroTitle) heroTitle.textContent = config.heroContent.title;
     if (heroDescription) heroDescription.textContent = config.heroContent.description;
 
-    // Update hero images
-    const heroSlides = document.querySelectorAll('.hero-slide img');
-    if (heroSlides[0] && config.images.hero1) heroSlides[0].src = config.images.hero1;
-    if (heroSlides[1] && config.images.hero2) heroSlides[1].src = config.images.hero2;
+    // Update hero images (Disabled to prefer hardcoded HTML)
+    // const heroSlides = document.querySelectorAll('.hero-slide img');
+    // if (heroSlides[0] && config.images.hero1) heroSlides[0].src = config.images.hero1;
+    // if (heroSlides[1] && config.images.hero2) heroSlides[1].src = config.images.hero2;
 
     // Update portfolio images (Disabled to prefer hardcoded HTML paths)
     // const portfolioItems = document.querySelectorAll('.portfolio-item img');
