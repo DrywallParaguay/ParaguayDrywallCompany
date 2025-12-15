@@ -219,6 +219,22 @@ document.querySelectorAll('.fade-in').forEach(element => {
 // === CONTACT FORM HANDLING ===
 const contactForm = document.getElementById('contactForm');
 
+// Modal Elements
+const successModal = document.getElementById('successModal');
+const closeModal = document.getElementById('closeModal');
+
+// Close modal logic
+closeModal.addEventListener('click', () => {
+    successModal.classList.remove('active');
+});
+
+// Close modal when clicking outside
+successModal.addEventListener('click', (e) => {
+    if (e.target === successModal) {
+        successModal.classList.remove('active');
+    }
+});
+
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -237,7 +253,8 @@ contactForm.addEventListener('submit', (e) => {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            alert('¡Mensaje enviado con éxito! Gracias por su interés. Un miembro de nuestro equipo se pondrá en contacto pronto.');
+            // Show custom modal instead of alert
+            successModal.classList.add('active');
             contactForm.reset();
         })
         .catch(error => {
