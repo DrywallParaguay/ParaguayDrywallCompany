@@ -3,7 +3,7 @@
 Add-Type -AssemblyName System.Drawing
 
 function Convert-ToJpeg ($filePath, $quality) {
-    echo "Processing $filePath"
+    Write-Output "Processing $filePath"
     $image = [System.Drawing.Image]::FromFile($filePath)
     
     # Encoder parameter for image quality
@@ -19,7 +19,7 @@ function Convert-ToJpeg ($filePath, $quality) {
     # Save
     $image.Save($newPath, $jpegCodec, $encoderParams)
     $image.Dispose()
-    echo "Saved to $newPath"
+    Write-Output "Saved to $newPath"
 }
 
 # List of heavy images to convert (Photos only, preserving transparency for logos)
@@ -36,7 +36,8 @@ foreach ($file in $imagesToConvert) {
     if (Test-Path $file) {
         $absPath = Resolve-Path $file
         Convert-ToJpeg $absPath 85
-    } else {
-        echo "File not found: $file"
+    }
+    else {
+        Write-Output "File not found: $file"
     }
 }
