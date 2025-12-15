@@ -59,27 +59,49 @@ tabButtons.forEach(button => {
 });
 
 // ===== LOAD CONFIGURATION =====
+// ===== LOAD CONFIGURATION =====
 function loadConfig() {
-    // Try to load from localStorage first, then fall back to config.json
+    // Try to load from localStorage first
     const savedConfig = localStorage.getItem('drywallConfig');
 
     if (savedConfig) {
-        const config = JSON.parse(savedConfig);
-        populateForm(config);
+        // Validation: Check if it's an empty object or just "null" string
+        try {
+            const config = JSON.parse(savedConfig);
+            if (Object.keys(config).length === 0) throw new Error("Empty config");
+            populateForm(config);
+        } catch (e) {
+            console.warn("Invalid local config, reloading defaults.", e);
+            loadDefaults();
+        }
     } else {
-        // Load from config.json
-        fetch('config.json')
-            .then(response => response.json())
-            .then(config => {
-                populateForm(config);
-                // Save to localStorage
-                localStorage.setItem('drywallConfig', JSON.stringify(config));
-            })
-            .catch(error => {
-                console.error('Error loading config:', error);
-                alert('Error al cargar la configuración. Por favor, recarga la página.');
-            });
+        loadDefaults();
     }
+}
+
+function loadDefaults() {
+    fetch('config.json')
+        .then(response => response.json())
+        .then(config => {
+            populateForm(config);
+            // Save to localStorage so we start with a valid state
+            localStorage.setItem('drywallConfig', JSON.stringify(config));
+        })
+        .catch(error => {
+            console.error('Error loading config:', error);
+            // Fallback object to prevent crash if json missing
+            populateForm({
+                siteName: 'Drywall Company',
+                logo: { text: 'Drywall', image: '' },
+                contact: {},
+                socialMedia: {},
+                images: {},
+                heroContent: {},
+                philosophy: {},
+                portfolioSection: {},
+                servicesSection: {}
+            });
+        });
 }
 
 // ===== POPULATE FORM =====

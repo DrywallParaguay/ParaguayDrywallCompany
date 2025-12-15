@@ -1,31 +1,86 @@
 {
-    "siteName": "DRYWALL COMPANY",
+    "siteName": "Drywall Company",
     "logo": {
-        "text": "DRYWALL COMPANY",
-        "image": ""
-    },
-    "contact": {
-        "phone": "+595 981 234 567",
-        "email": "info@drywallcompany.com",
-        "address": "Asunción, Paraguay"
-    },
-    "socialMedia": {
-        "facebook": "https://facebook.com/drywallcompany",
-        "instagram": "https://instagram.com/drywallcompany",
-        "linkedin": "https://linkedin.com/company/drywallcompany",
-        "whatsapp": "+595981234567"
-    },
-    "images": {
-        "hero1": "images/hero-1.png",
-        "hero2": "images/hero-2.png",
-        "portfolio1": "images/portfolio-1.png",
-        "portfolio2": "images/portfolio-2.png",
-        "portfolio3": "images/portfolio-3.png",
-        "portfolio4": "images/portfolio-4.png"
+        "text": "Drywall Company",
+        "image": "images/logo-brand.png"
     },
     "heroContent": {
         "subtitle": "Artesanía en Construcción Ligera",
         "title": "La Maestría del Detalle Invisible",
         "description": "Donde la precisión estructural se encuentra con la artesanía de élite"
+    },
+    "philosophy": {
+        "subtitle": "Nuestra Filosofía",
+        "title": "Ingeniería Detrás de Cada Muro",
+        "text1": "En Drywall Company no vendemos paneles. Vendemos <strong>perfección estructural</strong>. Cada proyecto es una obra de ingeniería donde la precisión milimétrica y la artesanía tradicional convergen para crear espacios que trascienden lo ordinario.",
+        "text2": "Nuestro compromiso con la excelencia se refleja en cada acabado, cada curva arquitectónica y cada superficie impecable. Somos arquitectos del silencio, maestros de la luz integrada y guardianes de la calidad de nivel 5.",
+        "highlights": [
+            { "title": "Precisión", "text": "Tolerancias milimétricas en cada instalación" },
+            { "title": "Artesanía", "text": "Técnicas refinadas por décadas de experiencia" },
+            { "title": "Innovación", "text": "Tecnología de vanguardia en construcción ligera" }
+        ]
+    },
+    "portfolioSection": {
+        "subtitle": "Nuestro Trabajo",
+        "title": "Galería de Excelencia",
+        "items": [
+            {
+                "title": "Acabado Nivel 5",
+                "desc": "Residencia privada - Superficies impecables",
+                "image": "images/portfolio-1.jpg"
+            },
+            {
+                "title": "Diseño Arquitectónico",
+                "desc": "Techo personalizado con geometría compleja",
+                "image": "images/portfolio-2.jpg"
+            },
+            {
+                "title": "Iluminación Integrada",
+                "desc": "Detalles de luz indirecta en cielo raso",
+                "image": "images/portfolio-3.jpg"
+            },
+            {
+                "title": "Aislamiento Acústico",
+                "desc": "Soluciones de insonorización para estudios",
+                "image": "images/portfolio-4.jpg"
+            }
+        ]
+    },
+    "servicesSection": {
+        "subtitle": "Servicios Premium",
+        "title": "Acabados de Élite",
+        "items": [
+            {
+                "title": "Instalación de Drywall de Lujo",
+                "desc": "Sistemas de construcción ligera con estándares arquitectónicos de máxima precisión. Cada instalación es supervisada por maestros artesanos con décadas de experiencia."
+            },
+            {
+                "title": "Acabados de Nivel 5",
+                "desc": "La cúspide de la perfección en acabados. Superficies completamente lisas y uniformes, preparadas para la iluminación más exigente y los acabados más refinados."
+            },
+            {
+                "title": "Aislamiento Acústico de Alta Gama",
+                "desc": "Sistemas de control de sonido de última generación. Diseñados para espacios que demandan privacidad absoluta y confort acústico superior."
+            },
+            {
+                "title": "Diseño de Techos Arquitectónicos",
+                "desc": "Estructuras tridimensionales complejas, curvas imposibles e integración de iluminación. Convertimos visiones arquitectónicas en realidad tangible."
+            }
+        ]
+    },
+    "contact": {
+        "phone": "+595 981 123 456",
+        "email": "info@drywallcompany.com.py",
+        "address": "Asunción, Paraguay"
+    },
+    "socialMedia": {
+        "facebook": "https://facebook.com",
+        "instagram": "https://instagram.com",
+        "linkedin": "https://linkedin.com",
+        "whatsapp": "https://wa.me/595981123456"
+    },
+    "images": {
+        "hero1": "images/hero-1.jpg",
+        "hero2": "images/hero-2.jpg"
     }
 }
