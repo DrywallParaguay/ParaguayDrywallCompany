@@ -733,7 +733,7 @@ p {
   }
 }
 
-  /* Mobile Adjustments */
+/* Mobile Adjustments */
 @media (max-width: 768px) {
   .whatsapp-float {
     width: 50px;
@@ -741,6 +741,29 @@ p {
     bottom: 20px;
     right: 20px;
   }
+}
+
+/* === SOCIAL MEDIA ICONS === */
+.social-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-champagne-gold);
+  transition: all 0.3s ease;
+}
+
+.social-icon-link svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.social-icon-link:hover {
+  color: white;
+  transform: translateY(-3px);
+  filter: drop-shadow(0 4px 6px rgba(212, 175, 120, 0.4));
 }
 
 /* === SUCCESS MODAL === */
