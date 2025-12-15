@@ -222,22 +222,32 @@ const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // Get form data
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        project: document.getElementById('project').value
-    };
+    const submitBtn = contactForm.querySelector('.submit-btn');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.textContent = 'Enviando...';
+    submitBtn.disabled = true;
 
-    // In a real implementation, you would send this to a server
-    console.log('Form submitted:', formData);
+    // Create FormData object from the form
+    const formData = new FormData(contactForm);
 
-    // Show success message
-    alert('Gracias por su interés. Un miembro de nuestro equipo se pondrá en contacto pronto para programar su Consulta de Diseño Privada.');
-
-    // Reset form
-    contactForm.reset();
+    fetch("https://formsubmit.co/ajax/drywall.labpy@gmail.com", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            alert('¡Mensaje enviado con éxito! Gracias por su interés. Un miembro de nuestro equipo se pondrá en contacto pronto.');
+            contactForm.reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un error al enviar el mensaje. Por favor, intente nuevamente o contáctenos por WhatsApp.');
+        })
+        .finally(() => {
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        });
 });
 
 // === PORTFOLIO ITEM HOVER ENHANCEMENT ===

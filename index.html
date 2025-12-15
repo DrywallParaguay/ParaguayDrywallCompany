@@ -178,7 +178,13 @@
       <p class="subtitle fade-in">Conversemos</p>
       <h2 class="fade-in">Consulta de Diseño Privada</h2>
 
-      <form class="contact-form fade-in" id="contactForm">
+      <form class="contact-form fade-in" id="contactForm" action="https://formsubmit.co/drywall.labpy@gmail.com"
+        method="POST">
+        <!-- FormSubmit Configuration -->
+        <input type="hidden" name="_subject" value="Nuevo contacto desde Drywall Company Web">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value=""> <!-- Handled by JS -->
         <div class="form-group">
           <label for="name">Nombre Completo</label>
           <input type="text" id="name" name="name" required>
