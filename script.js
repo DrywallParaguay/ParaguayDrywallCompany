@@ -2,6 +2,12 @@
 // DRYWALL COMPANY - PREMIUM INTERACTIONS
 // ===================================
 
+// === FORCE SCROLL TO TOP ON RELOAD ===
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 // === LOAD CONFIGURATION ===
 function loadSiteConfig() {
     // Try localStorage first (if admin made changes), otherwise use config.json
