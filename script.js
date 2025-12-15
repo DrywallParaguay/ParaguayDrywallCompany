@@ -256,6 +256,11 @@ contactForm.addEventListener('submit', (e) => {
             // Show custom modal instead of alert
             successModal.classList.add('active');
             contactForm.reset();
+            // Scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         })
         .catch(error => {
             console.error('Error:', error);
