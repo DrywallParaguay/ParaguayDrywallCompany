@@ -46,7 +46,9 @@
         <!-- NAVIGATION TABS -->
         <div class="admin-tabs">
             <button class="tab-btn active" data-tab="general">General</button>
-            <button class="tab-btn" data-tab="images">Imágenes</button>
+            <button class="tab-btn" data-tab="philosophy">Filosofía</button>
+            <button class="tab-btn" data-tab="portfolio">Portafolio</button>
+            <button class="tab-btn" data-tab="services">Servicios</button>
             <button class="tab-btn" data-tab="contact">Contacto</button>
             <button class="tab-btn" data-tab="social">Redes Sociales</button>
         </div>
@@ -100,138 +102,265 @@
                 </div>
             </div>
 
-            <!-- IMAGES TAB -->
-            <div class="tab-content" id="images">
-                <h2>Gestión de Imágenes</h2>
-                <p class="info-text">Selecciona imágenes desde tu PC. Las imágenes se guardarán automáticamente en el
-                    navegador.</p>
+        </div>
 
-                <div class="form-section">
-                    <h3>Imágenes del Hero (Slider Principal)</h3>
-
-                    <div class="form-group">
-                        <label for="hero1File">Hero Imagen 1</label>
-                        <div class="file-input-group">
-                            <input type="file" id="hero1File" accept="image/*">
-                            <button type="button" class="btn-clear" data-target="hero1">Limpiar</button>
-                        </div>
-                        <div class="image-preview" id="preview-hero1"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="hero2File">Hero Imagen 2</label>
-                        <div class="file-input-group">
-                            <input type="file" id="hero2File" accept="image/*">
-                            <button type="button" class="btn-clear" data-target="hero2">Limpiar</button>
-                        </div>
-                        <div class="image-preview" id="preview-hero2"></div>
-                    </div>
+        <!-- PHILOSOPHY TAB -->
+        <div class="tab-content" id="philosophy">
+            <h2>Sección Filosofía</h2>
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="philSubtitle">Subtítulo</label>
+                    <input type="text" id="philSubtitle" placeholder="Nuestra Filosofía">
                 </div>
-
-                <div class="form-section">
-                    <h3>Imágenes del Portafolio</h3>
-
-                    <div class="form-group">
-                        <label for="portfolio1File">Portafolio Imagen 1</label>
-                        <div class="file-input-group">
-                            <input type="file" id="portfolio1File" accept="image/*">
-                            <button type="button" class="btn-clear" data-target="portfolio1">Limpiar</button>
-                        </div>
-                        <div class="image-preview" id="preview-portfolio1"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="portfolio2File">Portafolio Imagen 2</label>
-                        <div class="file-input-group">
-                            <input type="file" id="portfolio2File" accept="image/*">
-                            <button type="button" class="btn-clear" data-target="portfolio2">Limpiar</button>
-                        </div>
-                        <div class="image-preview" id="preview-portfolio2"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="portfolio3File">Portafolio Imagen 3</label>
-                        <div class="file-input-group">
-                            <input type="file" id="portfolio3File" accept="image/*">
-                            <button type="button" class="btn-clear" data-target="portfolio3">Limpiar</button>
-                        </div>
-                        <div class="image-preview" id="preview-portfolio3"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="portfolio4File">Portafolio Imagen 4</label>
-                        <div class="file-input-group">
-                            <input type="file" id="portfolio4File" accept="image/*">
-                            <button type="button" class="btn-clear" data-target="portfolio4">Limpiar</button>
-                        </div>
-                        <div class="image-preview" id="preview-portfolio4"></div>
-                    </div>
+                <div class="form-group">
+                    <label for="philTitle">Título Principal</label>
+                    <input type="text" id="philTitle" placeholder="Ingeniería Detrás de Cada Muro">
+                </div>
+                <div class="form-group">
+                    <label for="philText1">Párrafo 1</label>
+                    <textarea id="philText1" rows="3" placeholder="Texto principal..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="philText2">Párrafo 2</label>
+                    <textarea id="philText2" rows="3" placeholder="Texto secundario..."></textarea>
                 </div>
             </div>
 
-            <!-- CONTACT TAB -->
-            <div class="tab-content" id="contact">
-                <h2>Información de Contacto</h2>
+            <div class="form-section">
+                <h3>Destacados (3 Ítems)</h3>
+                <!-- Item 1 -->
+                <div class="form-group bg-light p-3 mb-3">
+                    <label>Ítem 1</label>
+                    <input type="text" id="philHighTitle1" placeholder="Título (Ej: Precisión)" class="mb-2">
+                    <input type="text" id="philHighText1" placeholder="Descripción">
+                </div>
+                <!-- Item 2 -->
+                <div class="form-group bg-light p-3 mb-3">
+                    <label>Ítem 2</label>
+                    <input type="text" id="philHighTitle2" placeholder="Título (Ej: Artesanía)" class="mb-2">
+                    <input type="text" id="philHighText2" placeholder="Descripción">
+                </div>
+                <!-- Item 3 -->
+                <div class="form-group bg-light p-3">
+                    <label>Ítem 3</label>
+                    <input type="text" id="philHighTitle3" placeholder="Título (Ej: Innovación)" class="mb-2">
+                    <input type="text" id="philHighText3" placeholder="Descripción">
+                </div>
+            </div>
+        </div>
 
-                <div class="form-section">
-                    <div class="form-group">
-                        <label for="phone">Teléfono Principal</label>
-                        <input type="tel" id="phone" placeholder="+595 981 234 567">
-                    </div>
+        <!-- PORTFOLIO TAB (Previously Images) -->
+        <div class="tab-content" id="portfolio">
+            <h2>Gestión del Portafolio</h2>
+            <p class="info-text">Administra los textos e imágenes de la sección Portafolio.</p>
 
-                    <div class="form-group">
-                        <label for="email">Correo Electrónico</label>
-                        <input type="email" id="email" placeholder="info@drywallcompany.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Dirección</label>
-                        <input type="text" id="address" placeholder="Asunción, Paraguay">
-                    </div>
+            <div class="form-section">
+                <h3>Cabecera de Sección</h3>
+                <div class="form-group">
+                    <label for="portSubtitle">Subtítulo</label>
+                    <input type="text" id="portSubtitle" placeholder="Nuestro Trabajo">
+                </div>
+                <div class="form-group">
+                    <label for="portTitle">Título Principal</label>
+                    <input type="text" id="portTitle" placeholder="Galería de Excelencia">
                 </div>
             </div>
 
-            <!-- SOCIAL MEDIA TAB -->
-            <div class="tab-content" id="social">
-                <h2>Redes Sociales</h2>
-                <p class="info-text">Ingresa las URLs completas de tus redes sociales.</p>
-
-                <div class="form-section">
-                    <div class="form-group">
-                        <label for="facebook">Facebook</label>
-                        <input type="url" id="facebook" placeholder="https://facebook.com/drywallcompany">
+            <div class="form-section">
+                <h3>Imágenes del Hero (Slider Principal)</h3>
+                <div class="form-group">
+                    <label for="hero1File">Hero Imagen 1</label>
+                    <div class="file-input-group">
+                        <input type="file" id="hero1File" accept="image/*">
+                        <button type="button" class="btn-clear" data-target="hero1">Limpiar</button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="instagram">Instagram</label>
-                        <input type="url" id="instagram" placeholder="https://instagram.com/drywallcompany">
+                    <div class="image-preview" id="preview-hero1"></div>
+                </div>
+                <div class="form-group">
+                    <label for="hero2File">Hero Imagen 2</label>
+                    <div class="file-input-group">
+                        <input type="file" id="hero2File" accept="image/*">
+                        <button type="button" class="btn-clear" data-target="hero2">Limpiar</button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="linkedin">LinkedIn</label>
-                        <input type="url" id="linkedin" placeholder="https://linkedin.com/company/drywallcompany">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="whatsapp">WhatsApp</label>
-                        <input type="tel" id="whatsapp" placeholder="+595981234567">
-                        <small>Número sin espacios ni guiones</small>
-                    </div>
+                    <div class="image-preview" id="preview-hero2"></div>
                 </div>
             </div>
 
+            <div class="form-section">
+                <h3>Items del Portafolio</h3>
+
+                <!-- Portfolio 1 -->
+                <div class="form-group bg-light p-3 mb-4">
+                    <h4>Proyecto 1</h4>
+                    <label>Imagen</label>
+                    <div class="file-input-group mb-2">
+                        <input type="file" id="portfolio1File" accept="image/*">
+                        <button type="button" class="btn-clear" data-target="portfolio1">Limpiar</button>
+                    </div>
+                    <div class="image-preview mb-2" id="preview-portfolio1"></div>
+
+                    <label>Detalles</label>
+                    <input type="text" id="portItemTitle1" placeholder="Título (Ej: Acabado Nivel 5)" class="mb-2">
+                    <input type="text" id="portItemDesc1" placeholder="Descripción">
+                </div>
+
+                <!-- Portfolio 2 -->
+                <div class="form-group bg-light p-3 mb-4">
+                    <h4>Proyecto 2</h4>
+                    <label>Imagen</label>
+                    <div class="file-input-group mb-2">
+                        <input type="file" id="portfolio2File" accept="image/*">
+                        <button type="button" class="btn-clear" data-target="portfolio2">Limpiar</button>
+                    </div>
+                    <div class="image-preview mb-2" id="preview-portfolio2"></div>
+
+                    <label>Detalles</label>
+                    <input type="text" id="portItemTitle2" placeholder="Título" class="mb-2">
+                    <input type="text" id="portItemDesc2" placeholder="Descripción">
+                </div>
+
+                <!-- Portfolio 3 -->
+                <div class="form-group bg-light p-3 mb-4">
+                    <h4>Proyecto 3</h4>
+                    <label>Imagen</label>
+                    <div class="file-input-group mb-2">
+                        <input type="file" id="portfolio3File" accept="image/*">
+                        <button type="button" class="btn-clear" data-target="portfolio3">Limpiar</button>
+                    </div>
+                    <div class="image-preview mb-2" id="preview-portfolio3"></div>
+
+                    <label>Detalles</label>
+                    <input type="text" id="portItemTitle3" placeholder="Título" class="mb-2">
+                    <input type="text" id="portItemDesc3" placeholder="Descripción">
+                </div>
+
+                <!-- Portfolio 4 -->
+                <div class="form-group bg-light p-3">
+                    <h4>Proyecto 4</h4>
+                    <label>Imagen</label>
+                    <div class="file-input-group mb-2">
+                        <input type="file" id="portfolio4File" accept="image/*">
+                        <button type="button" class="btn-clear" data-target="portfolio4">Limpiar</button>
+                    </div>
+                    <div class="image-preview mb-2" id="preview-portfolio4"></div>
+
+                    <label>Detalles</label>
+                    <input type="text" id="portItemTitle4" placeholder="Título" class="mb-2">
+                    <input type="text" id="portItemDesc4" placeholder="Descripción">
+                </div>
+            </div>
         </div>
 
-        <!-- SAVE BUTTON -->
-        <div class="admin-footer">
-            <button class="btn-save" id="saveBtn">Guardar Cambios</button>
-            <button class="btn-preview" id="previewBtn">Vista Previa del Sitio</button>
+        <!-- SERVICES TAB -->
+        <div class="tab-content" id="services">
+            <h2>Sección Servicios</h2>
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="servSubtitle">Subtítulo</label>
+                    <input type="text" id="servSubtitle" placeholder="Servicios Premium">
+                </div>
+                <div class="form-group">
+                    <label for="servTitle">Título Principal</label>
+                    <input type="text" id="servTitle" placeholder="Acabados de Élite">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Tarjetas de Servicio (4 Ítems)</h3>
+
+                <!-- Service 1 -->
+                <div class="form-group bg-light p-3 mb-3">
+                    <label>Servicio 1</label>
+                    <input type="text" id="servItemTitle1" placeholder="Título" class="mb-2">
+                    <textarea id="servItemDesc1" rows="3" placeholder="Descripción"></textarea>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="form-group bg-light p-3 mb-3">
+                    <label>Servicio 2</label>
+                    <input type="text" id="servItemTitle2" placeholder="Título" class="mb-2">
+                    <textarea id="servItemDesc2" rows="3" placeholder="Descripción"></textarea>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="form-group bg-light p-3 mb-3">
+                    <label>Servicio 3</label>
+                    <input type="text" id="servItemTitle3" placeholder="Título" class="mb-2">
+                    <textarea id="servItemDesc3" rows="3" placeholder="Descripción"></textarea>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="form-group bg-light p-3">
+                    <label>Servicio 4</label>
+                    <input type="text" id="servItemTitle4" placeholder="Título" class="mb-2">
+                    <textarea id="servItemDesc4" rows="3" placeholder="Descripción"></textarea>
+                </div>
+            </div>
         </div>
 
-        <!-- SUCCESS MESSAGE -->
-        <div class="toast" id="toast">
-            Cambios guardados exitosamente!
+        <!-- CONTACT TAB -->
+        <div class="tab-content" id="contact">
+            <h2>Información de Contacto</h2>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="phone">Teléfono Principal</label>
+                    <input type="tel" id="phone" placeholder="+595 981 234 567">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" placeholder="info@drywallcompany.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Dirección</label>
+                    <input type="text" id="address" placeholder="Asunción, Paraguay">
+                </div>
+            </div>
         </div>
+
+        <!-- SOCIAL MEDIA TAB -->
+        <div class="tab-content" id="social">
+            <h2>Redes Sociales</h2>
+            <p class="info-text">Ingresa las URLs completas de tus redes sociales.</p>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="facebook">Facebook</label>
+                    <input type="url" id="facebook" placeholder="https://facebook.com/drywallcompany">
+                </div>
+
+                <div class="form-group">
+                    <label for="instagram">Instagram</label>
+                    <input type="url" id="instagram" placeholder="https://instagram.com/drywallcompany">
+                </div>
+
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn</label>
+                    <input type="url" id="linkedin" placeholder="https://linkedin.com/company/drywallcompany">
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp</label>
+                    <input type="tel" id="whatsapp" placeholder="+595981234567">
+                    <small>Número sin espacios ni guiones</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SAVE BUTTON -->
+    <div class="admin-footer">
+        <button class="btn-save" id="saveBtn">Guardar Cambios</button>
+        <button class="btn-preview" id="previewBtn">Vista Previa del Sitio</button>
+    </div>
+
+    <!-- SUCCESS MESSAGE -->
+    <div class="toast" id="toast">
+        Cambios guardados exitosamente!
+    </div>
 
     </div>
 

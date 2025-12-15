@@ -110,10 +110,63 @@ function populateForm(config) {
         allImages.logoImage = config.logo.image;
     }
 
+    // Philosophy
+    if (config.philosophy) {
+        document.getElementById('philSubtitle').value = config.philosophy.subtitle || '';
+        document.getElementById('philTitle').value = config.philosophy.title || '';
+        document.getElementById('philText1').value = config.philosophy.text1 || '';
+        document.getElementById('philText2').value = config.philosophy.text2 || '';
+        if (config.philosophy.highlights) {
+            config.philosophy.highlights.forEach((item, index) => {
+                if (index < 3) {
+                    document.getElementById(`philHighTitle${index + 1}`).value = item.title || '';
+                    document.getElementById(`philHighText${index + 1}`).value = item.text || '';
+                }
+            });
+        }
+    }
+
+    // Portfolio Section
+    if (config.portfolioSection) {
+        document.getElementById('portSubtitle').value = config.portfolioSection.subtitle || '';
+        document.getElementById('portTitle').value = config.portfolioSection.title || '';
+        if (config.portfolioSection.items) {
+            config.portfolioSection.items.forEach((item, index) => {
+                if (index < 4) {
+                    document.getElementById(`portItemTitle${index + 1}`).value = item.title || '';
+                    document.getElementById(`portItemDesc${index + 1}`).value = item.desc || '';
+                    if (item.image) {
+                        allImages[`portfolio${index + 1}`] = item.image;
+                    }
+                }
+            });
+        }
+    } else {
+        // Fallback for old config structure for images
+        allImages.portfolio1 = config.images.portfolio1;
+        allImages.portfolio2 = config.images.portfolio2;
+        allImages.portfolio3 = config.images.portfolio3;
+        allImages.portfolio4 = config.images.portfolio4;
+    }
+
+    // Services Section
+    if (config.servicesSection) {
+        document.getElementById('servSubtitle').value = config.servicesSection.subtitle || '';
+        document.getElementById('servTitle').value = config.servicesSection.title || '';
+        if (config.servicesSection.items) {
+            config.servicesSection.items.forEach((item, index) => {
+                if (index < 4) {
+                    document.getElementById(`servItemTitle${index + 1}`).value = item.title || '';
+                    document.getElementById(`servItemDesc${index + 1}`).value = item.desc || '';
+                }
+            });
+        }
+    }
+
     // Load image previews
     loadImagePreviews(allImages);
 
-    // Initialize pending images with current config
+    // Initialize pending images with current config (flattened for internal logic)
     pendingImages = { ...allImages };
 }
 
@@ -201,6 +254,25 @@ function clearImage(imageKey) {
 
 // ===== SAVE CONFIGURATION =====
 document.getElementById('saveBtn').addEventListener('click', () => {
+    // Gather Portfolio Items (Text + Image)
+    const portfolioItems = [];
+    for (let i = 1; i <= 4; i++) {
+        portfolioItems.push({
+            title: document.getElementById(`portItemTitle${i}`).value,
+            desc: document.getElementById(`portItemDesc${i}`).value,
+            image: pendingImages[`portfolio${i}`] || ''
+        });
+    }
+
+    // Gather Services
+    const services = [];
+    for (let i = 1; i <= 4; i++) {
+        services.push({
+            title: document.getElementById(`servItemTitle${i}`).value,
+            desc: document.getElementById(`servItemDesc${i}`).value
+        });
+    }
+
     const config = {
         siteName: document.getElementById('siteName').value,
         logo: {
@@ -220,16 +292,33 @@ document.getElementById('saveBtn').addEventListener('click', () => {
         },
         images: {
             hero1: pendingImages.hero1 || '',
-            hero2: pendingImages.hero2 || '',
-            portfolio1: pendingImages.portfolio1 || '',
-            portfolio2: pendingImages.portfolio2 || '',
-            portfolio3: pendingImages.portfolio3 || '',
-            portfolio4: pendingImages.portfolio4 || ''
+            hero2: pendingImages.hero2 || ''
         },
         heroContent: {
             subtitle: document.getElementById('heroSubtitle').value,
             title: document.getElementById('heroTitle').value,
             description: document.getElementById('heroDescription').value
+        },
+        philosophy: {
+            subtitle: document.getElementById('philSubtitle').value,
+            title: document.getElementById('philTitle').value,
+            text1: document.getElementById('philText1').value,
+            text2: document.getElementById('philText2').value,
+            highlights: [
+                { title: document.getElementById('philHighTitle1').value, text: document.getElementById('philHighText1').value },
+                { title: document.getElementById('philHighTitle2').value, text: document.getElementById('philHighText2').value },
+                { title: document.getElementById('philHighTitle3').value, text: document.getElementById('philHighText3').value }
+            ]
+        },
+        portfolioSection: {
+            subtitle: document.getElementById('portSubtitle').value,
+            title: document.getElementById('portTitle').value,
+            items: portfolioItems
+        },
+        servicesSection: {
+            subtitle: document.getElementById('servSubtitle').value,
+            title: document.getElementById('servTitle').value,
+            items: services
         }
     };
 

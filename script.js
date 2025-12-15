@@ -49,17 +49,91 @@ function applyConfig(config) {
     if (heroTitle) heroTitle.textContent = config.heroContent.title;
     if (heroDescription) heroDescription.textContent = config.heroContent.description;
 
-    // Update hero images (Disabled to prefer hardcoded HTML)
-    // const heroSlides = document.querySelectorAll('.hero-slide img');
-    // if (heroSlides[0] && config.images.hero1) heroSlides[0].src = config.images.hero1;
-    // if (heroSlides[1] && config.images.hero2) heroSlides[1].src = config.images.hero2;
+    // Update Philosophy Section
+    if (config.philosophy) {
+        const philSection = document.querySelector('.philosophy');
+        if (philSection) {
+            philSection.querySelector('.subtitle').textContent = config.philosophy.subtitle;
+            philSection.querySelector('h2').textContent = config.philosophy.title;
+            const paragraphs = philSection.querySelectorAll('p:not(.subtitle)');
+            if (paragraphs[0]) paragraphs[0].innerHTML = config.philosophy.text1; // Allow HTML for bolding
+            if (paragraphs[1]) paragraphs[1].innerText = config.philosophy.text2;
 
-    // Update portfolio images (Disabled to prefer hardcoded HTML paths)
-    // const portfolioItems = document.querySelectorAll('.portfolio-item img');
-    // if (portfolioItems[0] && config.images.portfolio1) portfolioItems[0].src = config.images.portfolio1;
-    // if (portfolioItems[1] && config.images.portfolio2) portfolioItems[1].src = config.images.portfolio2;
-    // if (portfolioItems[2] && config.images.portfolio3) portfolioItems[2].src = config.images.portfolio3;
-    // if (portfolioItems[3] && config.images.portfolio4) portfolioItems[3].src = config.images.portfolio4;
+            const highlights = philSection.querySelectorAll('.highlight-item');
+            if (config.philosophy.highlights) {
+                config.philosophy.highlights.forEach((item, index) => {
+                    if (highlights[index]) {
+                        highlights[index].querySelector('h3').textContent = item.title;
+                        highlights[index].querySelector('p').textContent = item.text;
+                    }
+                });
+            }
+        }
+    }
+
+    // Update Portfolio Section
+    if (config.portfolioSection) {
+        const portSection = document.querySelector('.portfolio');
+        if (portSection) {
+            portSection.querySelector('.subtitle').textContent = config.portfolioSection.subtitle;
+            portSection.querySelector('h2').textContent = config.portfolioSection.title;
+
+            // Rebuild Portfolio Grid
+            const portGrid = portSection.querySelector('.portfolio-grid');
+            if (portGrid && config.portfolioSection.items) {
+                portGrid.innerHTML = ''; // Clear existing
+                config.portfolioSection.items.forEach(item => {
+                    // Only add if title or image is present
+                    if (item.title || item.image) {
+                        const div = document.createElement('div');
+                        div.className = 'portfolio-item fade-in';
+                        div.innerHTML = `
+                            <img src="${item.image || 'images/portfolio-1.jpg'}" alt="${item.title}" loading="lazy">
+                            <div class="portfolio-item-overlay">
+                                <h3>${item.title}</h3>
+                                <p>${item.desc}</p>
+                            </div>
+                        `;
+                        // Re-attach hover event listeners effectively (since we verify listeners on page load, 
+                        // but dynamic elements need new ones. We'll delegate or re-run listener logic)
+                        div.addEventListener('mouseenter', function () { this.style.zIndex = '10'; });
+                        div.addEventListener('mouseleave', function () { this.style.zIndex = '1'; });
+
+                        // Observe for fade-in
+                        observer.observe(div);
+                        portGrid.appendChild(div);
+                    }
+                });
+            }
+        }
+    }
+
+    // Update Services Section
+    if (config.servicesSection) {
+        const servSection = document.querySelector('.services');
+        if (servSection) {
+            servSection.querySelector('.subtitle').textContent = config.servicesSection.subtitle;
+            servSection.querySelector('h2').textContent = config.servicesSection.title;
+
+            // Rebuild Services Grid
+            const servGrid = servSection.querySelector('.services-grid');
+            if (servGrid && config.servicesSection.items) {
+                servGrid.innerHTML = '';
+                config.servicesSection.items.forEach(item => {
+                    if (item.title) {
+                        const div = document.createElement('div');
+                        div.className = 'service-card fade-in';
+                        div.innerHTML = `
+                            <h3>${item.title}</h3>
+                            <p>${item.desc}</p>
+                        `;
+                        observer.observe(div);
+                        servGrid.appendChild(div);
+                    }
+                });
+            }
+        }
+    }
 
     // Add social media links to footer if they don't exist
     addSocialMediaLinks(config.socialMedia);
