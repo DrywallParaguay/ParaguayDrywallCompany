@@ -119,6 +119,7 @@ function populateForm(config) {
     document.getElementById('phone').value = config.contact.phone || '';
     document.getElementById('email').value = config.contact.email || '';
     document.getElementById('address').value = config.contact.address || '';
+    document.getElementById('webhookUrl').value = config.contact.webhookUrl || '';
 
     // Social Media
     document.getElementById('facebook').value = config.socialMedia.facebook || '';
@@ -304,7 +305,8 @@ document.getElementById('saveBtn').addEventListener('click', () => {
         contact: {
             phone: document.getElementById('phone').value,
             email: document.getElementById('email').value,
-            address: document.getElementById('address').value
+            address: document.getElementById('address').value,
+            webhookUrl: document.getElementById('webhookUrl').value
         },
         socialMedia: {
             facebook: document.getElementById('facebook').value,

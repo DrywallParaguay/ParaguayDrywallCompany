@@ -15,9 +15,18 @@
         "text1": "En Drywall Company no vendemos paneles. Vendemos <strong>perfección estructural</strong>. Cada proyecto es una obra de ingeniería donde la precisión milimétrica y la artesanía tradicional convergen para crear espacios que trascienden lo ordinario.",
         "text2": "Nuestro compromiso con la excelencia se refleja en cada acabado, cada curva arquitectónica y cada superficie impecable. Somos arquitectos del silencio, maestros de la luz integrada y guardianes de la calidad de nivel 5.",
         "highlights": [
-            { "title": "Precisión", "text": "Tolerancias milimétricas en cada instalación" },
-            { "title": "Artesanía", "text": "Técnicas refinadas por décadas de experiencia" },
-            { "title": "Innovación", "text": "Tecnología de vanguardia en construcción ligera" }
+            {
+                "title": "Precisión",
+                "text": "Tolerancias milimétricas en cada instalación"
+            },
+            {
+                "title": "Artesanía",
+                "text": "Técnicas refinadas por décadas de experiencia"
+            },
+            {
+                "title": "Innovación",
+                "text": "Tecnología de vanguardia en construcción ligera"
+            }
         ]
     },
     "portfolioSection": {
@@ -71,7 +80,8 @@
     "contact": {
         "phone": "+595 981 123 456",
         "email": "info@drywallcompany.com.py",
-        "address": "Asunción, Paraguay"
+        "address": "Asunción, Paraguay",
+        "webhookUrl": ""
     },
     "socialMedia": {
         "facebook": "https://facebook.com",

@@ -325,31 +325,84 @@ contactForm.addEventListener('submit', (e) => {
 
     // Create FormData object from the form
     const formData = new FormData(contactForm);
+    const dataObj = Object.fromEntries(formData.entries());
 
-    fetch("https://formsubmit.co/ajax/drywall.labpy@gmail.com", {
-        method: "POST",
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            // Show custom modal instead of alert
-            successModal.classList.add('active');
-            contactForm.reset();
-            // Scroll to top
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+    // Check if we have a Webhook URL in config
+    const savedConfig = localStorage.getItem('drywallConfig');
+    let webhookUrl = null;
+
+    if (savedConfig) {
+        try {
+            const config = JSON.parse(savedConfig);
+            if (config.contact && config.contact.webhookUrl && config.contact.webhookUrl.startsWith('http')) {
+                webhookUrl = config.contact.webhookUrl;
+            }
+        } catch (err) {
+            console.error('Error parsing config for webhook', err);
+        }
+    }
+
+    // Determine submission strategy
+    if (webhookUrl) {
+        // === STRATEGY A: SEND TO ACTIVEPIECES WEBHOOK ===
+        console.log('Sending to Activepieces Webhook:', webhookUrl);
+
+        fetch(webhookUrl, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataObj)
+        })
+            .then(response => {
+                if (response.ok) {
+                    showSuccess();
+                } else {
+                    throw new Error('Webhook error');
+                }
+            })
+            .catch(error => {
+                console.error('Webhook failed, trying fallback to FormSubmit', error);
+                // Fallback to FormSubmit if webhook fails
+                submitToFormSubmit(formData);
+            })
+            .finally(() => {
+                resetButton();
             });
+
+    } else {
+        // === STRATEGY B: DEFAULT FORMSUBMIT ===
+        console.log('Sending to FormSubmit (No Webhook configured)');
+        submitToFormSubmit(formData);
+        resetButton();
+    }
+
+    function submitToFormSubmit(fd) {
+        fetch("https://formsubmit.co/ajax/drywall.labpy@gmail.com", {
+            method: "POST",
+            body: fd
         })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Hubo un error al enviar el mensaje. Por favor, intente nuevamente o contáctenos por WhatsApp.');
-        })
-        .finally(() => {
-            submitBtn.textContent = originalBtnText;
-            submitBtn.disabled = false;
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                showSuccess();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al enviar el mensaje. Por favor, intente nuevamente o contáctenos por WhatsApp.');
+            });
+    }
+
+    function showSuccess() {
+        successModal.classList.add('active');
+        contactForm.reset();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetButton() {
+        submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
+    }
 });
 
 // === PORTFOLIO ITEM HOVER ENHANCEMENT ===
