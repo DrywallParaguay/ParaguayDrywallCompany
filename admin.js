@@ -306,7 +306,7 @@ document.getElementById('saveBtn').addEventListener('click', () => {
             phone: document.getElementById('phone').value,
             email: document.getElementById('email').value,
             address: document.getElementById('address').value,
-            webhookUrl: document.getElementById('webhookUrl').value
+            webhookUrl: document.getElementById('webhookUrl').value.trim()
         },
         socialMedia: {
             facebook: document.getElementById('facebook').value,
@@ -350,16 +350,17 @@ document.getElementById('saveBtn').addEventListener('click', () => {
     localStorage.setItem('drywallConfig', JSON.stringify(config));
 
     // Show success toast
-    showToast();
+    showToast(config);
 });
 
 // ===== SHOW TOAST =====
-function showToast() {
+function showToast(config) {
+    // Show success message
     const toast = document.getElementById('toast');
-    toast.classList.add('show');
+    toast.className = 'toast show';
 
     setTimeout(() => {
-        toast.classList.remove('show');
+        toast.className = 'toast';
     }, 3000);
 }
 

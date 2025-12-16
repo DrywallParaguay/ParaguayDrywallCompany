@@ -346,7 +346,6 @@ contactForm.addEventListener('submit', (e) => {
     if (webhookUrl) {
         // === STRATEGY A: SEND TO ACTIVEPIECES WEBHOOK ===
         console.log('Sending to Activepieces Webhook:', webhookUrl);
-        alert("Intento de Webhook a: " + webhookUrl);
 
         fetch(webhookUrl, {
             method: "POST",
@@ -364,7 +363,6 @@ contactForm.addEventListener('submit', (e) => {
             })
             .catch(error => {
                 console.error('Webhook failed, trying fallback to FormSubmit', error);
-                alert("⚠️ Error conectando con ActivePieces: " + error.message + "\n\nEnviando por correo alternativo...");
                 // Fallback to FormSubmit if webhook fails
                 submitToFormSubmit(formData);
             })
@@ -375,7 +373,6 @@ contactForm.addEventListener('submit', (e) => {
     } else {
         // === STRATEGY B: DEFAULT FORMSUBMIT ===
         console.log('Sending to FormSubmit (No Webhook configured)');
-        alert("No se encontró URL de Webhook en la configuración. Enviando por correo...");
         submitToFormSubmit(formData);
         resetButton();
     }
