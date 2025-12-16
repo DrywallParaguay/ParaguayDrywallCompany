@@ -191,6 +191,10 @@ function populateForm(config) {
 
     // Initialize pending images with current config (flattened for internal logic)
     pendingImages = { ...allImages };
+
+    if (typeof loadGalleryIntoAdmin === 'function') {
+        loadGalleryIntoAdmin(config);
+    }
 }
 
 // ===== LOAD IMAGE PREVIEWS =====
@@ -219,6 +223,14 @@ function setupFileUploadListeners() {
             if (!file.type.startsWith('image/')) {
                 alert('Por favor selecciona un archivo de imagen válido.');
                 return;
+            }
+
+            // Warn if image is > 100KB (soft limit recommendation for localStorage)
+            if (file.size > 100 * 1024) {
+                if (!confirm(`La imagen ${file.name} es pesada (${(file.size / 1024).toFixed(1)}KB). Guardar muchas imágenes grandes puede bloquear el panel. ¿Deseas continuar?`)) {
+                    this.value = ''; // Reset input
+                    return;
+                }
             }
 
             // Get the image key from input id (remove 'File' suffix)
@@ -343,14 +355,23 @@ document.getElementById('saveBtn').addEventListener('click', () => {
             subtitle: document.getElementById('servSubtitle').value,
             title: document.getElementById('servTitle').value,
             items: services
-        }
+        },
+        gallery: getGalleryConfig()
     };
 
-    // Save to localStorage
-    localStorage.setItem('drywallConfig', JSON.stringify(config));
-
-    // Show success toast
-    showToast(config);
+    // Save to localStorage with Error Handling
+    try {
+        localStorage.setItem('drywallConfig', JSON.stringify(config));
+        // Show success toast
+        showToast(config);
+    } catch (e) {
+        console.error("Storage failed:", e);
+        if (e.name === 'QuotaExceededError' || e.code === 22) {
+            alert("¡Error: Límite de almacenamiento excedido! Estás intentando guardar demasiadas imágenes o imágenes muy grandes. Por favor, usa imágenes más pequeñas o URLs externas.");
+        } else {
+            alert("Error al guardar la configuración: " + e.message);
+        }
+    }
 });
 
 // ===== SHOW TOAST =====

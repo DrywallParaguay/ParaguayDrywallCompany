@@ -48,6 +48,7 @@
             <button class="tab-btn active" data-tab="general">General</button>
             <button class="tab-btn" data-tab="philosophy">Filosofía</button>
             <button class="tab-btn" data-tab="portfolio">Portafolio</button>
+            <button class="tab-btn" data-tab="gallery">Galería</button>
             <button class="tab-btn" data-tab="services">Servicios</button>
             <button class="tab-btn" data-tab="contact">Contacto</button>
             <button class="tab-btn" data-tab="social">Redes Sociales</button>
@@ -251,6 +252,43 @@
             </div>
         </div>
 
+        <!-- GALLERY TAB -->
+        <div class="tab-content" id="gallery">
+            <h2>Gestión de Galería</h2>
+            <p class="info-text">Añade fotos a la nueva sección de Galería. Usa imágenes livianas o enlaces.</p>
+
+            <div class="form-section">
+                <h3>Añadir Nueva Imagen</h3>
+                <div class="form-group bg-light p-3">
+                    <label>Tipo de Imagen</label>
+                    <select id="galleryInputType" class="mb-2" onchange="toggleGalleryInput()">
+                        <option value="url">Enlace (URL)</option>
+                        <option value="file">Subir Archivo</option>
+                    </select>
+
+                    <div id="galleryUrlInput">
+                        <input type="text" id="galleryUrl" placeholder="https://ejemplo.com/foto.jpg">
+                    </div>
+
+                    <div id="galleryFileInput" style="display:none;">
+                        <div class="file-input-group">
+                            <input type="file" id="galleryFile" accept="image/*">
+                        </div>
+                    </div>
+
+                    <input type="text" id="galleryCaption" placeholder="Descripción (Opcional)" class="mt-2">
+                    <button type="button" class="btn-primary mt-2" id="addGalleryItemBtn">+ Añadir a la Lista</button>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Imágenes Actuales</h3>
+                <div id="galleryList" class="gallery-admin-list">
+                    <!-- List of current gallery items -->
+                </div>
+            </div>
+        </div>
+
         <!-- SERVICES TAB -->
         <div class="tab-content" id="services">
             <h2>Sección Servicios</h2>
@@ -371,6 +409,7 @@
 
     </div>
 
+    <script src="admin-gallery.js"></script>
     <script src="admin.js"></script>
 </body>
 

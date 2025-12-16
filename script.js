@@ -11,11 +11,20 @@ window.scrollTo(0, 0);
 // === LOAD CONFIGURATION ===
 function loadSiteConfig() {
     // Try localStorage first (if admin made changes), otherwise use config.json
-    const savedConfig = localStorage.getItem('drywallConfig');
+    let savedConfig = null;
+    try {
+        const item = localStorage.getItem('drywallConfig');
+        if (item) {
+            savedConfig = JSON.parse(item);
+        }
+    } catch (e) {
+        console.error("Error parsing saved config:", e);
+        // Clear corrupted config to prevent persistent crashes
+        localStorage.removeItem('drywallConfig');
+    }
 
     if (savedConfig) {
-        const config = JSON.parse(savedConfig);
-        applyConfig(config);
+        applyConfig(savedConfig);
     } else {
         // Load from config.json as fallback
         fetch('config.json')
@@ -132,6 +141,24 @@ function applyConfig(config) {
                     }
                 });
             }
+        }
+    }
+
+    // === GALLERY SECTION (NEW) ===
+    if (config.gallery && config.gallery.length > 0) {
+        const galleryGrid = document.getElementById('galleryGrid');
+        if (galleryGrid) {
+            let html = '';
+            config.gallery.forEach(item => {
+                html += `
+                <div class="gallery-item fade-in">
+                    <img src="${item.url}" alt="${item.caption || 'Gallery Image'}" loading="lazy">
+                    ${item.caption ? `<div class="gallery-caption">${item.caption}</div>` : ''}
+                </div>`;
+            });
+            galleryGrid.innerHTML = html;
+            // Observer for new elements
+            galleryGrid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         }
     }
 
