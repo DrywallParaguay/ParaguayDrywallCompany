@@ -167,6 +167,11 @@ function applyConfig(config) {
 
     // Update contact info in footer if exists
     updateContactInfo(config.contact);
+
+    // Update floating WhatsApp button
+    if (config.socialMedia && config.socialMedia.whatsapp) {
+        updateFloatingWhatsapp(config.socialMedia.whatsapp);
+    }
 }
 
 function addSocialMediaLinks(socialMedia) {
@@ -215,6 +220,25 @@ function addSocialMediaLinks(socialMedia) {
         });
 
         footer.insertBefore(socialLinksDiv, footer.firstChild);
+    }
+}
+
+function updateFloatingWhatsapp(whatsappUrl) {
+    const floatBtn = document.querySelector('.whatsapp-float');
+    if (floatBtn && whatsappUrl) {
+        // Ensure clean number format if the config provides a full URL
+        let finalUrl = whatsappUrl;
+
+        // If it's just a raw number in config (legacy), format it
+        if (!whatsappUrl.includes('wa.me') && !whatsappUrl.includes('http')) {
+            finalUrl = `https://wa.me/${whatsappUrl.replace(/\D/g, '')}`;
+        }
+        // If it's a URL but we want to ensure consistency (optional, but good safety)
+        else if (whatsappUrl.includes('wa.me')) {
+            // It's likely fine as is, or we could re-parse implies trust in config
+        }
+
+        floatBtn.href = finalUrl;
     }
 }
 
@@ -344,6 +368,25 @@ successModal.addEventListener('click', (e) => {
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    // === PARAGUAYAN PHONE VALIDATION ===
+    const phoneInput = document.getElementById('phone');
+    const phoneVal = phoneInput.value.replace(/\D/g, ''); // Remove non-digits
+
+    // Valid formats:
+    // 1. Mobile: Starts with 09, length 10 (0981 123 456)
+    // 2. Landline: Starts with 0, length 9 (021 123 456) or length 8/10 depending on region but usually strict patterns
+    // Simplified Regex: Starts with 09 (10 digits) OR Starts with 0 (not 09) (9 digits)
+    const validMobile = /^09\d{8}$/;
+    const validLandline = /^0\d{8}$/; // Assuming 9 digit standard for landlines with area code 0xx
+
+    if (phoneInput.value.trim() !== '') {
+        if (!validMobile.test(phoneVal) && !validLandline.test(phoneVal)) {
+            alert('Por favor, ingresa un número de teléfono válido de Paraguay.\n\nEjemplos:\nCelular: 0981 123 456 (10 dígitos)\nLínea Baja: 021 123 456 (9 dígitos)');
+            phoneInput.focus();
+            return;
+        }
+    }
 
     const submitBtn = contactForm.querySelector('.submit-btn');
     const originalBtnText = submitBtn.textContent;
