@@ -197,7 +197,7 @@ function addSocialMediaLinks(socialMedia) {
                 let href = socialMedia[platform];
 
                 if (platform === 'obra') {
-                    href = 'http://localhost:3000/';
+                    href = 'https://admin.drywallcompany.com.py/';
                 } else if (platform === 'whatsapp') {
                     href = `https://wa.me/${socialMedia[platform].replace(/\D/g, '')}`;
                 }
