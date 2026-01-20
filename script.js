@@ -553,4 +553,24 @@ function preloadImages() {
 }
 
 // Preload after initial load
+// Preload after initial load
 window.addEventListener('load', preloadImages);
+
+// Acceso Secreto Administrador (5 clics en el logo)
+document.addEventListener('DOMContentLoaded', () => {
+    const logoLink = document.querySelector('.logo');
+    if (logoLink) {
+        logoLink.addEventListener('click', () => {
+            let clicks = parseInt(sessionStorage.getItem('adminClicks') || '0');
+            clicks++;
+            if (clicks >= 5) {
+                sessionStorage.removeItem('adminClicks');
+                window.location.href = 'admin.html';
+            } else {
+                sessionStorage.setItem('adminClicks', clicks.toString());
+                // Reset clicks after 5 seconds of inactivity
+                setTimeout(() => sessionStorage.removeItem('adminClicks'), 5000);
+            }
+        });
+    }
+});
