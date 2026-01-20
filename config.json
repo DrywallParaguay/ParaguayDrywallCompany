@@ -87,7 +87,8 @@
         "facebook": "https://facebook.com",
         "instagram": "https://instagram.com",
         "linkedin": "https://linkedin.com",
-        "whatsapp": "https://wa.me/595981123456"
+        "whatsapp": "https://wa.me/595981123456",
+        "obra": "http://localhost:3000/"
     },
     "images": {
         "hero1": "images/hero-1.jpg",

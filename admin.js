@@ -385,6 +385,25 @@ function showToast(config) {
     }, 3000);
 }
 
+// ===== EXPORT CONFIGURATION =====
+function exportConfig() {
+    const savedConfig = localStorage.getItem('drywallConfig');
+    if (!savedConfig) {
+        alert("No hay cambios guardados para exportar.");
+        return;
+    }
+
+    // Prettify JSON
+    const configObj = JSON.parse(savedConfig);
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(configObj, null, 4));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "config.json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+}
+
 // ===== PREVIEW WEBSITE =====
 document.getElementById('previewBtn').addEventListener('click', () => {
     window.open('index.html', '_blank');
